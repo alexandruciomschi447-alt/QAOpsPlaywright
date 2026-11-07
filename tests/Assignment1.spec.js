@@ -83,7 +83,9 @@ test.only('@Web Client App login', async ({ page }) => {
 
     //- Assert: URL is BASE_URL/bookings
     await page.getByRole('link', { name: 'View My Bookings' }).click();
+    //din to be in to have url (dar codul l-am gresit)
     await expect(page).toHaveURL(`${BASE_URL}/bookings`);
+
     //- Get all booking cards (locate by id #booking-card)
 
 
