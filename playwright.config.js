@@ -16,7 +16,7 @@ export default defineConfig({
 
   use: {
     browserName: 'chromium',
-    headless: false,          // pune true dacă nu vrei să vezi browserul
+    headless: true,          // pune true dacă nu vrei să vezi browserul
     screenshot: 'only-on-failure',
     trace: 'on-first-retry',  // colectează trace la retry
   },
