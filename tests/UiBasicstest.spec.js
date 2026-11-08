@@ -10,25 +10,27 @@ test('First Playwright test', async ({browser})=>
       await page.locator('#signInBtn').click();
 });
 
-test('UI Controls', async ({page})=>
-{
-      await page.goto('https://rahulshettyacademy.com/loginpagePractise/');
-      const userName = await page.locator('#username');
-      const signIn = await page.locator('#signInBtn');
-      const documentLink = page.locator("[href*='documents-request'");
-      //dropdown example
-      const dropdown = await page.locator('select.form-control');
-      await dropdown.selectOption('consult');
-      //buttons
-      await page.locator('.radiotextsty').last().click();
-      await page.locator('#okayBtn').click();
-      //if it's checked
-      console.log(page.locator('.radiotextsty').last().isChecked());
-      await expect(page.locator('.radiotextsty').last()).toBeChecked();
-      //verify is to be checked 
-      await page.locator('#terms').click().toBeChecked();
-      //unchheck a btn
-      await page.locator('#terms').uncheck()
-      expect(await page.locator('#terms').isChecked).toBeFalsy();
-      await expect(documentLink).toHaveAttribute('class','blinkingText')
+test('UI Controls', async ({ page }) => {
+  await page.goto('https://rahulshettyacademy.com/loginpagePractise/');
+  const documentLink = page.locator("[href*='documents-request']");
+
+  // dropdown
+  await page.locator('select.form-control').selectOption('consult');
+
+  // radio button
+  await page.locator('.radiotextsty').last().click();
+  await page.locator('#okayBtn').click();
+  await expect(page.locator('.modal-backdrop')).toBeHidden();
+  const userRadio = page.locator('input[type="radio"]').last();
+  console.log(await userRadio.isChecked());
+  await expect(userRadio).toBeChecked();
+
+  // checkbox
+  await page.locator('#terms').check();
+  await expect(page.locator('#terms')).toBeChecked();
+  await page.locator('#terms').uncheck();
+  await expect(page.locator('#terms')).not.toBeChecked();
+
+  // atribut
+  await expect(documentLink).toHaveAttribute('class', 'blinkingText');
 });
