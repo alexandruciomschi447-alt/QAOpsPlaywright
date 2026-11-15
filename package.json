@@ -3,7 +3,14 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "scripts": {},
+  "scripts": {
+    "list": "node typescript-learning/check.cjs list",
+    "check": "node typescript-learning/check.cjs",
+    "check:topic": "node typescript-learning/check.cjs topic",
+    "check:all": "node typescript-learning/check.cjs all",
+    "progress": "node typescript-learning/check.cjs progress",
+    "curriculum:validate": "node typescript-learning/validate.cjs"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
@@ -12,6 +19,7 @@
     "@cucumber/cucumber": "^13.3.0",
     "@playwright/test": "^1.63.0",
     "@types/node": "^26.6.3",
-    "typescript": "^7.0.2"
+    "typescript": "^7.0.2",
+    "vitest": "^5.1.0"
   }
 }

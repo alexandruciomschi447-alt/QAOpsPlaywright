@@ -1,0 +1,3 @@
+import { it, expect, vi } from 'vitest';
+import * as subject from './exercise';
+it('requirement: CRUD, ordering, isolation, and array copying', () => { const r = new subject.MemoryRepository<{id:number;name:string}>(); const a = {id:2,name:'A'}; r.save(a); r.save({id:1,name:'B'}); r.save({id:2,name:'C'}); expect(r.all()).toEqual([{id:2,name:'C'},{id:1,name:'B'}]); expect(r.find(1)).toEqual({id:1,name:'B'}); const copy = r.all(); copy.pop(); expect(r.all()).toHaveLength(2); expect(r.remove(2)).toBe(true); expect(r.remove(2)).toBe(false); expect(r.find(2)).toBeUndefined(); expect(new subject.MemoryRepository().all()).toEqual([]); });

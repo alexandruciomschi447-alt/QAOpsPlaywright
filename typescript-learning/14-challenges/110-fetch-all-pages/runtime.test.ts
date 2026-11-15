@@ -1,0 +1,4 @@
+import { it, expect, vi } from 'vitest';
+import * as subject from './exercise';
+it('requirement: ordered pages and duplicate ids', async () => { const fetch = vi.fn(async (page:number) => ({items: page === 1 ? [{id:1,name:'A'}] : [{id:1,name:'B'},{id:2,name:'C'}], totalPages:2})); expect(await subject.fetchAll(fetch)).toEqual([{id:1,name:'A'},{id:2,name:'C'}]); expect(fetch.mock.calls).toEqual([[1],[2]]); });
+it('requirement: empty and failing pages', async () => { const empty = vi.fn(async () => ({items:[],totalPages:0})); expect(await subject.fetchAll(empty)).toEqual([]); expect(empty).toHaveBeenCalledTimes(1); const fetch = vi.fn().mockResolvedValueOnce({items:[],totalPages:3}).mockRejectedValueOnce(new Error('offline')); await expect(subject.fetchAll(fetch)).rejects.toThrow('offline'); expect(fetch).toHaveBeenCalledTimes(2); });
